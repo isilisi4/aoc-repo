@@ -1,15 +1,11 @@
 #!/usr/bin/env ruby 
 
-top_3_elves= [0,0,0]
-biggest_carrying_elf = 0
+top_3_elves = []
 count = 0
 
 File.foreach("input.txt"){ |line|
     if line == "\n"
-        top_3_elves[0] = count > top_3_elves[0] ? count : top_3_elves[0]
-        top_3_elves[1] = count < top_3_elves[0] && count > top_3_elves[1] ? count : top_3_elves[1]
-        top_3_elves[2] = count < top_3_elves[0] && count < top_3_elves[1] && count > top_3_elves[2] ? count : top_3_elves[2] 
-        
+        top_3_elves << count unless count == 0
         count = 0
         
     else
@@ -17,4 +13,6 @@ File.foreach("input.txt"){ |line|
     end
 }
 
-puts top_3_elves.sum
+top_3 = top_3_elves.sort.last(3).sum
+
+puts top_3
